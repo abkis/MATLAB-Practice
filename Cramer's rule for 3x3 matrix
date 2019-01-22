@@ -1,0 +1,50 @@
+function [x] = cramer(A, b)
+%Function for solving system of equations using Cramer's rule
+%for a 3x3 matrix
+
+%Test if A is invertible
+
+if isnumeric(A) == 1
+    if size(A) == [3, 3]
+        if size(b) == [3, 1]
+            d = det(A);
+            if d ~= 0
+                %if made it this far is possible to invert
+                %must make three new matrices for j = 1, 2, 3
+
+                A1 = [b, A(:, 2:3)];
+                A2 = [A(:, 1), b, A(:, 3)];
+                A3 = [A(:, 1:2), b];
+
+                %solution, x, is initialized
+
+                x = zeros(3, 1);
+
+                %solving cramer's equation
+
+                x(1) = det(A1)/d;
+                x(2) = det(A2)/d;
+                x(3) = det(A3)/d;
+            else
+                disp('matrix must be invertible')
+            end
+        else
+            disp('b must be 3x1')
+        end
+    else
+        disp('A must be 3x3')
+    end
+else
+    disp('A must be numeric')
+end
+
+            
+    
+    
+    
+    
+
+    
+    
+
+    
